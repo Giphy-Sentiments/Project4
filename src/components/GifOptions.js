@@ -12,7 +12,7 @@ const [gif, setGif] = useState([]);
       url: "https://api.giphy.com/v1/gifs/search",
       method: "GET",
       params: {
-        api_key: "1BbHy9UljgG0JLrabA8WdBhCXn8qZNuz",c
+        api_key: "1BbHy9UljgG0JLrabA8WdBhCXn8qZNuz",
         q: "funny cat",
         limit: 1,
       },
