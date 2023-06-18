@@ -1,44 +1,32 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./Form.css";
+import ".././App.css";
 
 function Form() {
-
-    const [gif, setGif] = useState([]);
-
-
-    useEffect(() => {
-
-        axios({
-            url: 'https://api.giphy.com/v1/gifs/search',
-            method: 'GET',
-            params: {
-                api_key: '1BbHy9UljgG0JLrabA8WdBhCXn8qZNuz',
-                q: 'funny cat',
-                limit: 1
-            }
-
-        }).then((res) => {
-
-            const gifData = res.data.data;
-            setGif(gifData);
-            console.log(res.data.data);
-
-        })
-
-    }
-        , []);
+// store the emotion the user submitted in the form in usestate
+  const[gifEmotion, setGifEmotion] = useState([]);
 
 
+  return (
+    <div>
 
+      <form action="" className="form">
+        <label htmlFor="gifEmotion">How do you feel today?</label>
+        <input
+          id="gifEmotion"
+          value={gifEmotion}
+          onChange={handleInputChange}
+          type="text"
+          placeholder="Type your emotion"
+        />
+        <button type="submit" onClick={handleSubmit}>
+          Search
+        </button>
+      </form>
 
-
-    return (
-
-        <div>
-            <img src={gif[0].images.original.url} alt="gif" />
-        </div>
-    )
+     
+    </div>
+  );
 }
 
 export default Form;
