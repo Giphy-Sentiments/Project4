@@ -1,25 +1,23 @@
+function Header() {
+  const currentDate = new Date();
+  const day = currentDate.toLocaleDateString("en-US", { weekday: "long" });
 
-
-function Header {
-    return(
-
+  return (
     <header>
-        
-        {/* insert logo */}
-        <img/>
-        <nav>
-            <ul>
-                {/* <li>Login</li> */}
-                <li>About</li>
-                <li>Timeline</li> 
-            </ul>
-       </nav>
+      {/* insert logo */}
+      <img src="#" />
+      <nav>
+        <ul>
+          {/* <li>Login</li> */}
+          <li>About</li>
+          <li>Timeline</li>
+        </ul>
+      </nav>
 
-        <h1>Giphy Sentiments</h1>
-        {/* Luis will look into the date change for H2 */}
-        <h2> Happy ___ </h2>
+      <h1>Giphy Sentiments</h1>
+      <h2>Happy {day}</h2>
     </header>
- 
-    )
+  );
 }
+
 export default Header;

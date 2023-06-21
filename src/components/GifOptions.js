@@ -1,4 +1,4 @@
-function GifOptions {
+function GifOptions() {
 
 // store the gif that was provided by the API
 const [gif, setGif] = useState([]);
