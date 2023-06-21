@@ -1,15 +1,20 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import ".././App.css";
+import { useState } from "react";
 
-function Form() {
-// store the emotion the user submitted in the form in usestate
-  const[gifEmotion, setGifEmotion] = useState([]);
+function Form({ setEmotion }) {
+  const [gifEmotion, setGifEmotion] = useState("");
 
+  const handleInputChange = (event) => {
+    setGifEmotion(event.target.value);
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setEmotion(gifEmotion);
+    setGifEmotion('');
+  }
 
   return (
     <div>
-
       <form action="" className="form">
         <label htmlFor="gifEmotion">How do you feel today?</label>
         <input
@@ -23,8 +28,6 @@ function Form() {
           Search
         </button>
       </form>
-
-     
     </div>
   );
 }
