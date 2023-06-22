@@ -1,21 +1,15 @@
-import { useState } from "react";
+import React from 'react';
 
-function Form({ setEmotion }) {
-  const [gifEmotion, setGifEmotion] = useState("");
+function Form({ gifEmotion, setGifEmotion, handleSearch }) {
 
   const handleInputChange = (event) => {
     setGifEmotion(event.target.value);
-  }
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setEmotion(gifEmotion);
-    setGifEmotion('');
-  }
+  };
 
   return (
     <div>
-      <form action="" className="form">
+      <p>How are you feeling today?</p>
+      <form action="" className="form" onSubmit={handleSearch}>
         <label htmlFor="gifEmotion">How do you feel today?</label>
         <input
           id="gifEmotion"
@@ -24,7 +18,7 @@ function Form({ setEmotion }) {
           type="text"
           placeholder="Type your emotion"
         />
-        <button type="submit" onClick={handleSubmit}>
+        <button type="submit">
           Search
         </button>
       </form>
