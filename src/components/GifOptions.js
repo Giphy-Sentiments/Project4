@@ -23,7 +23,12 @@ function GifOptions({ searchTerm }) {
   return (
     <div className="gifOptions">
       {gifs.map((gif) => (
-        <img src={gif.images.fixed_height.url} alt={gif.title} key={gif.id} />
+        <img 
+          src={gif.images.original.url} 
+          alt={gif.title} 
+          key={gif.id} 
+          style={{width: '250px', height: '200px'}}
+        />
       ))}
     </div>
   );
