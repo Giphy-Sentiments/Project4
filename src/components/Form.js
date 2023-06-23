@@ -1,26 +1,24 @@
 import React from 'react';
 
-function Form({ gifEmotion, setGifEmotion, handleSearch }) {
+function Form({ trackValue, setTrackValue, handleSearch }) {
 
   const handleInputChange = (event) => {
-    setGifEmotion(event.target.value);
+    setTrackValue(event.target.value);
   };
 
   return (
-    <div>
+    <div className='formContainer'>
       <p>How are you feeling today?</p>
       <form action="" className="form" onSubmit={handleSearch}>
-        <label htmlFor="gifEmotion">How do you feel today?</label>
+        <label htmlFor="trackValue">I am:</label>
         <input
-          id="gifEmotion"
-          value={gifEmotion}
+          id="trackValue"
+          value={trackValue}
           onChange={handleInputChange}
           type="text"
           placeholder="Type your emotion"
         />
-        <button type="submit">
-          Search
-        </button>
+        <button type="submit">Search</button>
       </form>
     </div>
   );
