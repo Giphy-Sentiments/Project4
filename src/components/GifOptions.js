@@ -13,24 +13,27 @@ function GifOptions({ searchTerm }) {
           api_key: "1BbHy9UljgG0JLrabA8WdBhCXn8qZNuz",
           q: searchTerm,
           limit: 3,
+          // random_id:""
         },
       }).then((res) => {
+        console.log(res.data.data)
         setGifs(res.data.data);
       });
     }
   }, [searchTerm]);
 
   return (
-    <div className="gifOptions">
+    <ul className="gifOptions">
+      <li className="gifList">
       {gifs.map((gif) => (
-        <img 
-          src={gif.images.original.url} 
-          alt={gif.title} 
-          key={gif.id} 
-          style={{width: '250px', height: '200px'}}
-        />
+        <img src={gif.images.original.url} 
+        alt={gif.title} 
+        key={gif.id} 
+        style={{width:'200px', height: '200px'}}/>
       ))}
-    </div>
+      </li>
+      <button>More gifs</button>
+    </ul>
   );
 }
 

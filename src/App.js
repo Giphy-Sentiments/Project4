@@ -6,20 +6,25 @@ import Footer from './components/Footer.js';
 import GifOptions from './components/GifOptions';
 
 function App() {
-  const [gifEmotion, setGifEmotion] = useState("");
+  // declared two state variables to represent the emotion and search term to be used for searching gif & set value as empty string 
+
+  // this tracks the value of the input 
+  const [trackValue, setTrackValue] = useState("");
+
+  // user submitted input 
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setSearchTerm(gifEmotion);
+    setSearchTerm(trackValue);
   };
 
   return (
     <div className="App">
       <Header/>
       <Form 
-        gifEmotion={gifEmotion} 
-        setGifEmotion={setGifEmotion} 
+        trackValue={trackValue} 
+        setTrackValue={setTrackValue} 
         handleSearch={handleSearch}
       />
       <GifOptions searchTerm={searchTerm}/>
