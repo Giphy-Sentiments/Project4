@@ -10,13 +10,17 @@ function App() {
 
   // this tracks the value of the input 
   const [trackValue, setTrackValue] = useState("");
-
+  
   // user submitted input 
   const [searchTerm, setSearchTerm] = useState("");
+
+  // count for number of times search button is clicked
+  const [searchCount, setSearchCount] = useState(0);
 
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchTerm(trackValue);
+    setSearchCount((prevCount) => prevCount + 1);
   };
 
   return (
@@ -27,11 +31,10 @@ function App() {
         setTrackValue={setTrackValue} 
         handleSearch={handleSearch}
       />
-      <GifOptions searchTerm={searchTerm}/>
+      <GifOptions searchTerm={searchTerm} searchCount={searchCount} />
       <Footer/>
     </div>
   );
 }
-
 
 export default App;
