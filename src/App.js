@@ -6,27 +6,29 @@ import Footer from './components/Footer.js';
 import GifOptions from './components/GifOptions';
 
 function App() {
-  const [gifEmotion, setGifEmotion] = useState("");
+  const [trackValue, setTrackValue] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchCount, setSearchCount] = useState(0);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setSearchTerm(gifEmotion);
+    setSearchTerm(trackValue);
+    setSearchCount((prevCount) => prevCount + 1);
+    setTrackValue("");
   };
 
   return (
     <div className="App">
       <Header/>
       <Form 
-        gifEmotion={gifEmotion} 
-        setGifEmotion={setGifEmotion} 
+        trackValue={trackValue} 
+        setTrackValue={setTrackValue} 
         handleSearch={handleSearch}
       />
-      <GifOptions searchTerm={searchTerm}/>
+      <GifOptions searchTerm={searchTerm} searchCount={searchCount} />
       <Footer/>
     </div>
   );
 }
-
 
 export default App;
