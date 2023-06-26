@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { FadeLoader } from "react-spinners";
 
 function GifOptions({ searchTerm, searchCount }) {
   const [gifs, setGifs] = useState([[]]);
   const [offset, setOffset] = useState(0);
   const [alert, setAlert] = useState(false);
 
+  // API loading state 
+  // state will keep track of loading variable 
+
+  const [loading, setLoading] = useState(false); 
+
+  const override = {
+    display:"block",
+    margin:"0, auto", 
+    borderColor:"red",
+  };
+  
   const fetchGifs = () => {
+    // set loading true until API loads
+    setLoading(true);
+
     axios({
       url: "https://api.giphy.com/v1/gifs/search",
       method: "GET",
@@ -20,10 +35,16 @@ function GifOptions({ searchTerm, searchCount }) {
       setGifs((oldGifs) => {
         const newGifs = [...oldGifs];
         newGifs[newGifs.length - 1] = res.data.data;
+
+        // once API loads set loading to false 
+        setTimeout(() => {
+          setLoading(false)
+        }, 1000)
+
         return newGifs;
-      });
+        });
       setOffset((prevOffset) => prevOffset + 3);
-    });
+    })
   };
 
   useEffect(() => {
@@ -47,23 +68,38 @@ function GifOptions({ searchTerm, searchCount }) {
 
 
   return (
-    <div className="gifOptions">
+    <>
+    {loading? (
+      <FadeLoader
+        color="#192422"
+        loading={loading}
+        cssOverride={override}
+        size={550}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    ) :(
+    <ul className="gifOptions">
       {gifs.map((gifRow, index) => (
-        <ul className="gifList" key={index}>
+        <li className="gifList" key={index}>
           {gifRow.map((gif) => (
-            <li key={gif.id}>
+            <div  key={gif.id}>
               <img
                 src={gif.images.original.url}
                 alt={gif.title}
                 style={{ width: "200px", height: "200px" }}
               />
-            </li>
+            </div>
           ))}
-        </ul>
+        </li>
       ))}
-      {alert && <div>You can only search for a total of 9 gifs</div>}
+      {alert && <div>Please search again</div>}
       <button onClick={handleMoreGifs}>More gifs</button>
-    </div>
+    </ul>
+    )}
+
+    </>
+
   );
 }
 
