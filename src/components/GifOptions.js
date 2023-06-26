@@ -16,6 +16,7 @@ function GifOptions({ searchTerm, searchCount }) {
     display:"block",
     margin:"0, auto", 
     borderColor:"red",
+    alignItems:"center",
   };
   
   const fetchGifs = () => {
