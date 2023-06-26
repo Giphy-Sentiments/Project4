@@ -46,15 +46,16 @@ h1 {
   text-transform: uppercase;
 }
 
-.gifOptions{
-  background: rgb(32, 164, 204);
+.gifOptions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.gifList{
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    padding: 25px;
+.gifList {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 img {
