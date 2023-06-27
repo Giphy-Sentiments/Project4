@@ -1,51 +1,35 @@
-function GifOptions {
-
-// store the gif that was provided by the API
-const [gif, setGif] = useState([]);
-
-// take form input as param and us it as q in api params
-// const [emotionInput, setEmotionInput]  = useParams([]);
-
-// make API call to get gif
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+function GifOptions({ searchTerm }) {
+  const [gifs, setGifs] = useState([]);
   useEffect(() => {
-    axios({
-      url: "https://api.giphy.com/v1/gifs/search",
-      method: "GET",
-      params: {
-        api_key: "1BbHy9UljgG0JLrabA8WdBhCXn8qZNuz",
-        q: "funny cat",
-        limit: 1,
-      },
-    }).then((res) => {
-      const gifData = res.data.data;
-      setGif(gifData);
-      console.log(res.data.data);
-    });
-  }, []);
-
-    return(
-
-        <div>
-            <p> select a gif </p>
-            <ul>
-                {gif.map((selectedGif) =>  (       
-                  <>
-                    <li>
-                    <img src={selectedGif.images.original.url} alt="gif" />
-                    {/* create a button with a onclick function to submit selection into firebase */}
-                    </li>
-                  </>     
-                ))}
-            </ul>
-
-
-        {/* link that goes to timeline */}
-        <button onClick={}>More gifs</button>
-      </div>
-    )
-
+    if (searchTerm) {
+      axios({
+        url: "https://api.giphy.com/v1/gifs/search",
+        method: "GET",
+        params: {
+          api_key: "1BbHy9UljgG0JLrabA8WdBhCXn8qZNuz",
+          q: searchTerm,
+          limit: 3,
+        },
+      }).then((res) => {
+        console.log(res.data.data)
+        setGifs(res.data.data);
+      });
+    }
+  }, [searchTerm]);
+  return (
+    <ul className="gifOptions">
+      <li className="gifList">
+        {gifs.map((gif) => (
+          <img src={gif.images.original.url}
+            alt={gif.title}
+            key={gif.id}
+            style={{ width: '200px', height: '200px' }} />
+        ))}
+      </li>
+      <button>More gifs</button>
+    </ul>
+  );
 }
 export default GifOptions;
-
-
-              
