@@ -1,30 +1,25 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import ".././App.css";
+import React from 'react';
 
-function Form() {
-// store the emotion the user submitted in the form in usestate
-  const[gifEmotion, setGifEmotion] = useState([]);
+function Form({ trackValue, setTrackValue, handleSearch }) {
 
+  const handleInputChange = (event) => {
+    setTrackValue(event.target.value);
+  };
 
   return (
-    <div>
-
-      <form action="" className="form">
-        <label htmlFor="gifEmotion">How do you feel today?</label>
+    <div className='formContainer'>
+      <p>How are you feeling today?</p>
+      <form action="" className="form" onSubmit={handleSearch}>
+        <label htmlFor="trackValue">I am:</label>
         <input
-          id="gifEmotion"
-          value={gifEmotion}
+          id="trackValue"
+          value={trackValue}
           onChange={handleInputChange}
           type="text"
           placeholder="Type your emotion"
         />
-        <button type="submit" onClick={handleSubmit}>
-          Search
-        </button>
+        <button type="submit">Search</button>
       </form>
-
-     
     </div>
   );
 }
