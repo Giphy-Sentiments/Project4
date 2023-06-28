@@ -6,7 +6,7 @@ import './App.css';
 // 1. Get data from datebase and display on the page
 // 2. Allow users to save books in our database
 // 3. Allow users to remove books they have saved
-function StoreGifs({searchTerm, (url)}) {
+function StoreGifs({ searchTerm }) {
     const [storeGifs, setStoreGifs] = useState([]);
 
     useEffect(() => {
@@ -51,39 +51,34 @@ function StoreGifs({searchTerm, (url)}) {
         //button function
             <button onClick={handleClick}>
             //image that includes the icon with the toggle function
-            <img className={isToggled ? 'isToggledCSSclass' : 'notToggledCSSclass'} src='icon' />
+                <img className={isToggled ? 'isToggledCSSclass' : 'notToggledCSSclass'} src='icon' />
             </button>
         </div>
-        );
-    };
-    
-    // figure out how to track if button is toggled and store it in a useState
-    // onclick function will look at useState to see if it is toggled and will store data into firebase if toggled
-    const handleSubmit = (event) => {
-        // prevent the default action (submit)
-        event.preventDefault();
-        // save stuff into the database
-        const database = getDatabase(firebase);
-        const dbRef = ref(database);
-        push(dbRef, userInput);
-        // update the state after submit to an empty string
-        setUserInput('');
-    }
-
-    const handleRemoveBook = (bookId) => {
-        console.log('remove a book');
-        // reach out to firebase and remove a book
-        // event.target => element, read that element
-        const database = getDatabase(firebase);
-        // tell the database which node (book) to delete:
-        const dbRef = ref(database, `/${bookId}`)
-        remove(dbRef);
-    }
-    return (
-        <div className="App">
-
-        </div>
     );
+};
+
+// figure out how to track if button is toggled and store it in a useState
+// onclick function will look at useState to see if it is toggled and will store data into firebase if toggled
+const handleSubmit = (event) => {
+    // prevent the default action (submit)
+    event.preventDefault();
+    // save stuff into the database
+    const database = getDatabase(firebase);
+    const dbRef = ref(database);
+    push(dbRef, userInput);
+    // update the state after submit to an empty string
+    setUserInput('');
 }
+
+const handleRemoveBook = (bookId) => {
+    console.log('remove a book');
+    // reach out to firebase and remove a book
+    // event.target => element, read that element
+    const database = getDatabase(firebase);
+    // tell the database which node (book) to delete:
+    const dbRef = ref(database, `/${bookId}`)
+    remove(dbRef);
+}
+
 
 export default StoreGifs;
