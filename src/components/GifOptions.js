@@ -67,7 +67,7 @@ function GifOptions({ searchTerm, searchCount }) {
     }
   };
 
-
+  console.log(gifs)
   return (
     <>
     {loading? (
@@ -80,28 +80,57 @@ function GifOptions({ searchTerm, searchCount }) {
         data-testid="loader"
       />
     ) :(
-    <ul className="gifOptions">
-      {gifs.map((gifRow, index) => (
-        <li className="gifList" key={index}>
-          {gifRow.map((gif) => (
-            <div  key={gif.id}>
-              <img
-                src={gif.images.original.url}
-                alt={gif.title}
-                style={{ width: "200px", height: "200px" }}
-              />
-            </div>
-          ))}
-        </li>
-      ))}
-      {alert && <div>Please search again</div>}
-      <button onClick={handleMoreGifs}>More gifs</button>
-    </ul>
+        <form>
+          <fieldset>
+            <label className="gifList" htmlFor="gifOptions" aria-label="gifs">
+              {gifs[0].map((gif, index) => {
+                console.log(gif)
+                return (
+                  <input
+                    className="radio"
+                    type="radio"
+                    name="gif"
+                    value={gif.images.original.url}
+                    style={{ "backgroundImage": `url(${gif.images.original.url})`, "backgroundSize": '300px 300px' }}
+                    // key={index}
+                    
+                  />
+
+                )
+                // console.log(gif?.images?.original?.url);
+              })}
+            </label>
+            {alert && <div>Please search again</div>}
+            <button onClick={handleMoreGifs}>More gifs</button>
+          </fieldset>
+        </form>
+      
+      
+
     )}
 
     </>
 
   );
 }
+
+{/* <ul className="gifOptions">
+  {gifs.map((gifRow, index) => (
+    <li className="gifList" key={index}>
+      {gifRow.map((gif) => (
+        <div key={gif.id}>
+          <img
+            src={gif.images.original.url}
+            alt={gif.title}
+            style={{ width: "200px", height: "200px" }}
+          />
+        </div>
+      ))}
+    </li>
+  ))}
+  {alert && <div>Please search again</div>}
+  <button onClick={handleMoreGifs}>More gifs</button>
+</ul> */}
+
 
 export default GifOptions;
