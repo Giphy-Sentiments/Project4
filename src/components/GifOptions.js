@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FadeLoader } from "react-spinners";
+import StoreGifs from "./StoreGifs";
 
 function GifOptions({ searchTerm, searchCount }) {
   const [gifs, setGifs] = useState([[]]);
   const [offset, setOffset] = useState(0);
   const [alert, setAlert] = useState(false);
+  const [selectedGif, setSelectedGif] = useState("");
+  const [finalSelection, setFinalSelection] = useState("");
 
   // API loading state 
   // state will keep track of loading variable 
@@ -57,7 +60,16 @@ function GifOptions({ searchTerm, searchCount }) {
     }
   }, [searchTerm, searchCount]);
 
+  const select = (e) => {
+    setSelectedGif(e.target.value);
+  };
 
+  const sendToResults = (e) => {
+    e.preventDefault();
+    setFinalSelection(selectedGif);
+    setSelectedGif("");
+  };
+  
   const handleMoreGifs = () => {
     if (gifs.length < 3) {
       setGifs((oldGifs) => [...oldGifs, []]);
@@ -67,7 +79,7 @@ function GifOptions({ searchTerm, searchCount }) {
     }
   };
 
-
+  console.log(gifs)
   return (
     <>
     {loading? (
@@ -80,28 +92,68 @@ function GifOptions({ searchTerm, searchCount }) {
         data-testid="loader"
       />
     ) :(
-    <ul className="gifOptions">
-      {gifs.map((gifRow, index) => (
-        <li className="gifList" key={index}>
-          {gifRow.map((gif) => (
-            <div  key={gif.id}>
-              <img
-                src={gif.images.original.url}
-                alt={gif.title}
-                style={{ width: "200px", height: "200px" }}
-              />
-            </div>
-          ))}
-        </li>
-      ))}
-      {alert && <div>Please search again</div>}
-      <button onClick={handleMoreGifs}>More gifs</button>
-    </ul>
+        <section>
+          <form>
+            <fieldset>
+              <label className="gifList" htmlFor="gifOptions" aria-label="gifs">
+                {gifs[0].map((gif, index) => {
+                  console.log(gif)
+                  return (
+                    <input
+                      className="radio"
+                      type="radio"
+                      name="gif"
+                      value={gif.images.original.url}
+                      style={{ "backgroundImage": `url(${gif.images.original.url})`, "backgroundSize": '300px 300px' }}
+                      key={index}
+                      onChange={select}
+                      checked={selectedGif === gif.images.original.url}
+                      disabled={finalSelection ? true : false}
+                    />
+                  )
+                  // console.log(gif?.images?.original?.url);
+                })}
+              </label>
+              {alert && <div>Please search again</div>}
+              <button className="button" onClick={sendToResults} disabled={finalSelection ? true : false}>select this gif</button>
+            
+              <button onClick={handleMoreGifs}>More gifs</button>
+
+            </fieldset>
+          </form>
+          <div>
+              <StoreGifs finalSelection={finalSelection} searchTerm={searchTerm} />
+          </div>
+        </section>
+        
+        
+      
+      
+
     )}
 
     </>
 
   );
 }
+
+{/* <ul className="gifOptions">
+  {gifs.map((gifRow, index) => (
+    <li className="gifList" key={index}>
+      {gifRow.map((gif) => (
+        <div key={gif.id}>
+          <img
+            src={gif.images.original.url}
+            alt={gif.title}
+            style={{ width: "200px", height: "200px" }}
+          />
+        </div>
+      ))}
+    </li>
+  ))}
+  {alert && <div>Please search again</div>}
+  <button onClick={handleMoreGifs}>More gifs</button>
+</ul> */}
+
 
 export default GifOptions;

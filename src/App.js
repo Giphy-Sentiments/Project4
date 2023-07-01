@@ -4,6 +4,7 @@ import Form from './components/Form.js';
 import Header from './components/Header.js';
 import Footer from './components/Footer.js';
 import GifOptions from './components/GifOptions';
+import Timeline from './components/Timeline';
 
 function App() {
   const [trackValue, setTrackValue] = useState("");
@@ -26,6 +27,7 @@ function App() {
         handleSearch={handleSearch}
       />
       <GifOptions searchTerm={searchTerm} searchCount={searchCount} />
+      <Timeline />
       <Footer/>
     </div>
   );
