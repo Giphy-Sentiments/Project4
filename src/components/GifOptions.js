@@ -97,17 +97,17 @@ function GifOptions({ searchTerm, searchCount }) {
   };
 
 
-  return (
+ return (
     <>
     {loading? (
       <FadeLoader
         color="#192422"
         loading={loading}
-        // cssOverride={override}
+        cssOverride={override}
         size={550}
         aria-label="Loading Spinner"
         data-testid="loader"
-      />
+      /> 
     ) :(
     <ul className="gifOptions">
       {gifs.map((gifRow, index) => (
