@@ -10,18 +10,18 @@ function GifOptions({ searchTerm, searchCount }) {
   const [selectedGif, setSelectedGif] = useState("");
   const [finalSelection, setFinalSelection] = useState("");
 
-  // API loading state 
-  // state will keep track of loading variable 
+  // API loading state
+  // state will keep track of loading variable
 
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
 
   const override = {
-    display:"block",
-    margin:"0, auto", 
-    borderColor:"red",
-    alignItems:"center",
+    display: "block",
+    margin: "0, auto",
+    borderColor: "red",
+    alignItems: "center",
   };
-  
+
   const fetchGifs = () => {
     // set loading true until API loads
     setLoading(true);
@@ -40,15 +40,15 @@ function GifOptions({ searchTerm, searchCount }) {
         const newGifs = [...oldGifs];
         newGifs[newGifs.length - 1] = res.data.data;
 
-        // once API loads set loading to false 
+        // once API loads set loading to false
         setTimeout(() => {
-          setLoading(false)
-        }, 1000)
+          setLoading(false);
+        }, 1000);
 
         return newGifs;
-        });
+      });
       setOffset((prevOffset) => prevOffset + 3);
-    })
+    });
   };
 
   useEffect(() => {
@@ -69,7 +69,7 @@ function GifOptions({ searchTerm, searchCount }) {
     setFinalSelection(selectedGif);
     setSelectedGif("");
   };
-  
+
   const handleMoreGifs = () => {
     if (gifs.length < 3) {
       setGifs((oldGifs) => [...oldGifs, []]);
@@ -79,65 +79,70 @@ function GifOptions({ searchTerm, searchCount }) {
     }
   };
 
-  console.log(gifs)
+  console.log(gifs);
   return (
     <>
-    {loading? (
-      <FadeLoader
-        color="#192422"
-        loading={loading}
-        cssOverride={override}
-        size={550}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
-    ) :(
+      {loading ? (
+        <FadeLoader
+          color="#192422"
+          loading={loading}
+          cssOverride={override}
+          size={550}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      ) : (
         <section>
           <form>
             <fieldset>
               <label className="gifList" htmlFor="gifOptions" aria-label="gifs">
                 {gifs[0].map((gif, index) => {
-                  console.log(gif)
+                  console.log(gif);
                   return (
                     <input
                       className="radio"
                       type="radio"
                       name="gif"
                       value={gif.images.original.url}
-                      style={{ "backgroundImage": `url(${gif.images.original.url})`, "backgroundSize": '300px 300px' }}
+                      style={{
+                        backgroundImage: `url(${gif.images.original.url})`,
+                        backgroundSize: "300px 300px",
+                      }}
                       key={index}
                       onChange={select}
                       checked={selectedGif === gif.images.original.url}
                       disabled={finalSelection ? true : false}
                     />
-                  )
+                  );
                   // console.log(gif?.images?.original?.url);
                 })}
               </label>
               {alert && <div>Please search again</div>}
-              <button className="button" onClick={sendToResults} disabled={finalSelection ? true : false}>select this gif</button>
-            
-              <button onClick={handleMoreGifs}>More gifs</button>
+              <button
+                className="button"
+                onClick={sendToResults}
+                disabled={finalSelection ? true : false}
+              >
+                select this gif
+              </button>
 
+              <button onClick={handleMoreGifs}>More gifs</button>
             </fieldset>
           </form>
           <div>
-              <StoreGifs finalSelection={finalSelection} searchTerm={searchTerm} />
+            <StoreGifs
+              finalSelection={finalSelection}
+              searchTerm={searchTerm}
+            />
           </div>
         </section>
-        
-        
-      
-      
-
-    )}
-
+      )}
     </>
-
   );
 }
 
-{/* <ul className="gifOptions">
+{
+  /* <ul className="gifOptions">
   {gifs.map((gifRow, index) => (
     <li className="gifList" key={index}>
       {gifRow.map((gif) => (
@@ -153,7 +158,7 @@ function GifOptions({ searchTerm, searchCount }) {
   ))}
   {alert && <div>Please search again</div>}
   <button onClick={handleMoreGifs}>More gifs</button>
-</ul> */}
-
+</ul> */
+}
 
 export default GifOptions;
