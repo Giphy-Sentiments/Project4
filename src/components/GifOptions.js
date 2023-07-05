@@ -3,62 +3,18 @@ import axios from "axios";
 import { FadeLoader } from "react-spinners";
 import StoreGifs from "./StoreGifs";
 
-function GifOptions({ searchTerm, searchCount }) {
-  const [gifs, setGifs] = useState([[]]);
-  const [offset, setOffset] = useState(0);
-  const [alert, setAlert] = useState(false);
+function GifOptions({ searchTerm }) {
+  // initial state for the gifs - contains data we get form the API
+  const [gifs, setGifs] = useState([]);
+
+  // state for initial amount of gifs to display to the user
+  const [visible, setVisible] = useState(3);
+
+  // select
   const [selectedGif, setSelectedGif] = useState("");
+
+  // final selection
   const [finalSelection, setFinalSelection] = useState("");
-
-  // API loading state
-  // state will keep track of loading variable
-
-  const [loading, setLoading] = useState(false);
-
-  const override = {
-    display: "block",
-    margin: "0, auto",
-    borderColor: "red",
-    alignItems: "center",
-  };
-
-  const fetchGifs = () => {
-    // set loading true until API loads
-    setLoading(true);
-
-    axios({
-      url: "https://api.giphy.com/v1/gifs/search",
-      method: "GET",
-      params: {
-        api_key: "1BbHy9UljgG0JLrabA8WdBhCXn8qZNuz",
-        q: searchTerm,
-        limit: 3,
-        offset: offset,
-      },
-    }).then((res) => {
-      setGifs((oldGifs) => {
-        const newGifs = [...oldGifs];
-        newGifs[newGifs.length - 1] = res.data.data;
-
-        // once API loads set loading to false
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000);
-
-        return newGifs;
-      });
-      setOffset((prevOffset) => prevOffset + 3);
-    });
-  };
-
-  useEffect(() => {
-    if (searchTerm) {
-      setGifs([[]]);
-      setOffset(0);
-      setAlert(false);
-      fetchGifs();
-    }
-  }, [searchTerm, searchCount]);
 
   const select = (e) => {
     setSelectedGif(e.target.value);
@@ -70,52 +26,84 @@ function GifOptions({ searchTerm, searchCount }) {
     setSelectedGif("");
   };
 
-  const handleMoreGifs = () => {
-    if (gifs.length < 3) {
-      setGifs((oldGifs) => [...oldGifs, []]);
-      fetchGifs();
-    } else {
-      setAlert(true);
-    }
+  // API loading state styling
+  const cssOverride = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
   };
 
-  console.log(gifs);
+  //function to update the visible state so when user requests more gifs onClick it will add 3 more gifs each time the array is mapped over
+
+  const showMoreGifs = (e) => {
+    e.preventDefault();
+    // add 3 to previous visible state value
+    setVisible((prevValue) => prevValue + 3);
+  };
+
+  //state will keep track of the loading variable
+  const [loading, setLoading] = useState(false);
+
+
+  useEffect(() => {
+    if (searchTerm) {
+      // set loading true until API loads
+      setLoading(true);
+
+      axios({
+        url: "https://api.giphy.com/v1/gifs/search",
+        method: "GET",
+        params: {
+          api_key: "1BbHy9UljgG0JLrabA8WdBhCXn8qZNuz",
+          q: searchTerm,
+          limit: 9,
+        },
+      }).then((res) => {
+        console.log(res.data.data);
+        setGifs(res.data.data);
+
+        //once API loads set loading to false
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+      });
+    }
+  }, [searchTerm]);
+
   return (
     <>
       {loading ? (
         <FadeLoader
           color="#192422"
           loading={loading}
-          cssOverride={override}
+          cssOverride={cssOverride}
           size={550}
           aria-label="Loading Spinner"
           data-testid="loader"
         />
       ) : (
-        <section>
+        <>
           <form>
             <fieldset>
               <label className="gifList" htmlFor="gifOptions" aria-label="gifs">
-                {gifs[0].map((gif, index) => {
-                  console.log(gif);
-                  return (
+                {gifs.slice(0, visible).map((gif, index) => (
+                  <div className="gifContainer" key={index}>
                     <input
                       className="radio"
                       type="radio"
                       name="gif"
                       value={gif.images.original.url}
-                      style={{
-                        backgroundImage: `url(${gif.images.original.url})`,
-                        backgroundSize: "300px 300px",
-                      }}
-                      key={index}
                       onChange={select}
                       checked={selectedGif === gif.images.original.url}
                       disabled={finalSelection ? true : false}
                     />
-                  );
-                  // console.log(gif?.images?.original?.url);
-                })}
+                    <img
+                      src={gif.images.original.url}
+                      alt={gif.title}
+                      style={{ width: "200px", height: "200px" }}
+                    />
+                  </div>
+                ))}
               </label>
               {alert && <div>Please search again</div>}
               <button
@@ -123,42 +111,25 @@ function GifOptions({ searchTerm, searchCount }) {
                 onClick={sendToResults}
                 disabled={finalSelection ? true : false}
               >
-                select this gif
+                Select Gif
               </button>
-
-              <button onClick={handleMoreGifs}>More gifs</button>
+              {visible < gifs.length && (
+                <button onClick={showMoreGifs}> More gifs</button>
+              )}
             </fieldset>
           </form>
+
           <div>
             <StoreGifs
               finalSelection={finalSelection}
               searchTerm={searchTerm}
             />
           </div>
-        </section>
+        </>
       )}
     </>
   );
 }
 
-{
-  /* <ul className="gifOptions">
-  {gifs.map((gifRow, index) => (
-    <li className="gifList" key={index}>
-      {gifRow.map((gif) => (
-        <div key={gif.id}>
-          <img
-            src={gif.images.original.url}
-            alt={gif.title}
-            style={{ width: "200px", height: "200px" }}
-          />
-        </div>
-      ))}
-    </li>
-  ))}
-  {alert && <div>Please search again</div>}
-  <button onClick={handleMoreGifs}>More gifs</button>
-</ul> */
-}
-
 export default GifOptions;
+
