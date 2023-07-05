@@ -80,7 +80,7 @@ button:active {
   opacity: 1;
 }
 
-.radio {
+/* .radio {
   display: block;
   appearance: none;
   width: 300px;
@@ -95,4 +95,4 @@ button:active {
   transition: all 0.1s ease 0.1s;
   cursor: pointer;
   opacity: 0.7;
-}
+} */

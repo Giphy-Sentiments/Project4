@@ -44,6 +44,13 @@ function GifOptions({ searchTerm }) {
   //state will keep track of the loading variable
   const [loading, setLoading] = useState(false);
 
+  // // state keep track of fav gifs
+  // const [favs, setFavs] = useState([])
+
+  // // function that handles adding a gif to the favorites
+  // const addToFavs =(gif) => {
+  //   setFavs((prevFavs)=> [...prevFavs, gif]);
+  // };
 
   useEffect(() => {
     if (searchTerm) {
@@ -91,6 +98,7 @@ function GifOptions({ searchTerm }) {
                     <input
                       className="radio"
                       type="radio"
+                      id={`gif${index}`}
                       name="gif"
                       value={gif.images.original.url}
                       onChange={select}
@@ -132,4 +140,3 @@ function GifOptions({ searchTerm }) {
 }
 
 export default GifOptions;
-
