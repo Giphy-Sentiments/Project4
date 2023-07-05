@@ -10,7 +10,6 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 
 .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
 
-
 body {
   text-align: center;
   background:  #b6e0f0;
@@ -46,16 +45,18 @@ h1 {
   text-transform: uppercase;
 }
 
-.gifOptions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.gifList {
+.gifOptions{
+  background: rgb(32, 164, 204);
   display: flex;
   justify-content: center;
-  gap: 10px;
+  align-items: center;
+  gap: 20px;
+}
+
+.gifList{
+    padding: 25px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 img {
@@ -78,6 +79,10 @@ button:hover {
 
 button:active {
   opacity: 1;
+}
+
+.return{
+  align-items: center;
 }
 
 /* .radio {

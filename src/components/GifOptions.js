@@ -98,7 +98,6 @@ function GifOptions({ searchTerm }) {
                     <input
                       className="radio"
                       type="radio"
-                      id={`gif${index}`}
                       name="gif"
                       value={gif.images.original.url}
                       onChange={select}
