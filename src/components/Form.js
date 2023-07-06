@@ -35,7 +35,7 @@ const handleInputChange = (event) => {
           type="text"
           placeholder="Type your emotion"
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="button">Search</button>
       </form>
     </div>
   );
