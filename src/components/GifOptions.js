@@ -94,25 +94,27 @@ function GifOptions({ searchTerm }) {
             <fieldset>
               <label className="gifList" htmlFor="gifOptions" aria-label="gifs">
                 {gifs.slice(0, visible).map((gif, index) => (
-                  <div className="gifContainer" key={index}>
+               
                     <input
                       className="radio"
                       type="radio"
                       name="gif"
                       value={gif.images.original.url}
+                      style={{
+                        backgroundImage: `url(${gif.images.original.url})`,
+                        backgroundSize: "300px 300px",
+                      }}
+                      key={index}
                       onChange={select}
                       checked={selectedGif === gif.images.original.url}
                       disabled={finalSelection ? true : false}
                     />
-                    <img
-                      src={gif.images.original.url}
-                      alt={gif.title}
-                      style={{ width: "200px", height: "200px" }}
-                    />
-                  </div>
+                  
+
                 ))}
               </label>
-              {alert && <div>Please search again</div>}
+              {/* <Prompt message="Please search again"/> */}
+              {/* {alert && <div>Please search again</div>} */}
               <button
                 className="button"
                 onClick={sendToResults}
