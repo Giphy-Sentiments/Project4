@@ -129,7 +129,7 @@ function GifOptions({ searchTerm }) {
                 Select Gif
               </button>
               <button onClick={showMoreGifs}> More gifs</button>
-              {showAlert && <div>Please search again</div>}
+              {showAlert && <div>Please Select From the Options Above</div>}
             </fieldset>
           </form>
 
