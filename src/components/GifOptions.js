@@ -16,6 +16,8 @@ function GifOptions({ searchTerm }) {
   // final selection
   const [finalSelection, setFinalSelection] = useState("");
 
+  const [showAlert, setShowAlert] = useState(false);
+
   const select = (e) => {
     setSelectedGif(e.target.value);
   };
@@ -37,8 +39,11 @@ function GifOptions({ searchTerm }) {
 
   const showMoreGifs = (e) => {
     e.preventDefault();
-    // add 3 to previous visible state value
-    setVisible((prevValue) => prevValue + 3);
+    if (visible >= gifs.length) {
+      setShowAlert(true);
+    } else {
+      setVisible((prevValue) => prevValue + 3);
+    }
   };
 
   //state will keep track of the loading variable
@@ -123,9 +128,8 @@ function GifOptions({ searchTerm }) {
               >
                 Select Gif
               </button>
-              {visible < gifs.length && (
-                <button onClick={showMoreGifs}> More gifs</button>
-              )}
+              <button onClick={showMoreGifs}> More gifs</button>
+              {showAlert && <div>Please search again</div>}
             </fieldset>
           </form>
 
