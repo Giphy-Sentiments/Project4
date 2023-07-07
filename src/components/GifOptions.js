@@ -63,7 +63,7 @@ function GifOptions({ searchTerm }) {
           limit: 9,
         },
       }).then((res) => {
-        console.log(res.data.data);
+        
         setGifs(res.data.data);
 
         //once API loads set loading to false
@@ -75,6 +75,7 @@ function GifOptions({ searchTerm }) {
   }, [searchTerm]);
 
   return (
+   
     <>
       {loading ? (
         <FadeLoader
@@ -86,10 +87,13 @@ function GifOptions({ searchTerm }) {
           data-testid="loader"
         />
       ) : (
+      
         <>
+        { gifs.length > 0 && (
           <form>
             <fieldset>
               <label className="gifList" htmlFor="gifOptions" aria-label="gifs">
+              
                 {gifs.slice(0, visible).map((gif, index) => (
                
                     <input
@@ -109,6 +113,7 @@ function GifOptions({ searchTerm }) {
                   
 
                 ))}
+              
               </label>
 
               {visible === gifs.length && <div>Please Select From the Options Above</div>}          
@@ -124,16 +129,20 @@ function GifOptions({ searchTerm }) {
               )}
             </fieldset>
           </form>
-
+        )}
+        { finalSelection &&
           <div>
             <StoreGifs
               finalSelection={finalSelection}
               searchTerm={searchTerm}
             />
           </div>
+        }
         </>
+        
       )}
     </>
+    
   );
 }
 
