@@ -16,6 +16,8 @@ function GifOptions({ searchTerm }) {
   // final selection
   const [finalSelection, setFinalSelection] = useState("");
 
+  const [showAlert, setShowAlert] = useState(false);
+
   const select = (e) => {
     setSelectedGif(e.target.value);
   };
@@ -37,20 +39,15 @@ function GifOptions({ searchTerm }) {
 
   const showMoreGifs = (e) => {
     e.preventDefault();
-    // add 3 to previous visible state value
-    setVisible((prevValue) => prevValue + 3);
+    if (visible >= gifs.length) {
+      setShowAlert(true);
+    } else {
+      setVisible((prevValue) => prevValue + 3);
+    }
   };
 
   //state will keep track of the loading variable
   const [loading, setLoading] = useState(false);
-
-  // // state keep track of fav gifs
-  // const [favs, setFavs] = useState([])
-
-  // // function that handles adding a gif to the favorites
-  // const addToFavs =(gif) => {
-  //   setFavs((prevFavs)=> [...prevFavs, gif]);
-  // };
 
   useEffect(() => {
     if (searchTerm) {
@@ -113,8 +110,8 @@ function GifOptions({ searchTerm }) {
 
                 ))}
               </label>
-              {/* <Prompt message="Please search again"/> */}
-              {/* {alert && <div>Please search again</div>} */}
+
+              {visible === gifs.length && <div>Please Select From the Options Above</div>}          
               <button
                 className="button"
                 onClick={sendToResults}
@@ -123,7 +120,7 @@ function GifOptions({ searchTerm }) {
                 Select Gif
               </button>
               {visible < gifs.length && (
-                <button onClick={showMoreGifs}> More gifs</button>
+                <button onClick={showMoreGifs} className="button"> More gifs</button>
               )}
             </fieldset>
           </form>
