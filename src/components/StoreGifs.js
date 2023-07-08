@@ -28,7 +28,7 @@ function StoreGifs({ searchTerm, finalSelection }) {
   };
 
   return (
-    <div>
+    <div className="wrapper">
       <img
         src={`${finalSelection}`}
         alt={`user's selected gif that represents the mood of ${searchTerm}`}

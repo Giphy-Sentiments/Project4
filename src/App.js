@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import Form from "./components/Form.js";
+// import Form from "./components/Form.js";
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
 import GifOptions from "./components/GifOptions";
@@ -16,8 +16,6 @@ function App() {
         <Route path="/" element={<Home />}/>
         <Route path="/timeline" element={<Timeline />}/>
       </Routes>
-      
-      <Footer />
     </div>
   );
 }
