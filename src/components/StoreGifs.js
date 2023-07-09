@@ -1,5 +1,5 @@
 import firebaseConfig from "./firebase";
-import { getDatabase, ref, push } from "firebase/database";
+import { getDatabase, ref, push, orderByChild, equalTo } from "firebase/database";
 import app from "./firebase.js";
 import "../App.css";
 import { Link } from "react-router-dom";
@@ -24,7 +24,18 @@ function StoreGifs({ searchTerm, finalSelection }) {
   const sendToTimeline = () => {
     const database = getDatabase(firebaseConfig);
     const databaseRef = ref(database);
-    push(databaseRef, result);
+
+    const dateRef = orderByChild("date").equalTo(result.date);
+    dateRef.once("value", (snapshot) => {
+      if (snapshot.exists()) {
+        const overwrite = window.prompt("This date already exists in the database. Do you want to overwrite it? (yes/no)");
+        if (overwrite === "yes") {
+          push(databaseRef, result);
+        }
+      } else {
+        push(databaseRef, result);
+      }
+    });
   };
 
   return (
