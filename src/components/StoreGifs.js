@@ -1,12 +1,8 @@
 import firebaseConfig from "./firebase";
-import { getDatabase, ref, push, orderByChild, equalTo } from "firebase/database";
-import app from "./firebase.js";
+import { getDatabase, ref, push, orderByChild, equalTo, get, query } from "firebase/database";
 import "../App.css";
 import { Link } from "react-router-dom";
 
-// 1. Get data from datebase and display on the page
-// 2. Allow users to save books in our database
-// 3. Allow users to remove books they have saved
 function StoreGifs({ searchTerm, finalSelection }) {
   const date = new Date();
   const month = date.toLocaleString("en-US", {
@@ -25,17 +21,20 @@ function StoreGifs({ searchTerm, finalSelection }) {
     const database = getDatabase(firebaseConfig);
     const databaseRef = ref(database);
 
-    const dateRef = orderByChild("date").equalTo(result.date);
-    dateRef.once("value", (snapshot) => {
-      if (snapshot.exists()) {
-        const overwrite = window.prompt("This date already exists in the database. Do you want to overwrite it? (yes/no)");
-        if (overwrite === "yes") {
+    const today = `${month} ${day}, ${year}`;
+    const gifsOnDateRef = query(databaseRef, orderByChild("date"), equalTo(today));
+
+    get(gifsOnDateRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          alert("Gif has been populated for that day");
+        } else {
           push(databaseRef, result);
         }
-      } else {
-        push(databaseRef, result);
-      }
-    });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -49,14 +48,9 @@ function StoreGifs({ searchTerm, finalSelection }) {
         Save to Timeline
       </Link>
 
-      {/* <button onClick={sendToTimeline} >
-                Save to Timeline
-            </button> */}
-
     </div>
   );
 }
 
-
-
 export default StoreGifs;
+
