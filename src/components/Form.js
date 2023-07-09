@@ -7,7 +7,7 @@ function Form({ trackValue, setTrackValue, handleSearch }) {
   };
 
   return (
-    <div className='formContainer'>
+    <div className="formContainer wrapper">
       <p>How are you feeling today?</p>
       <form action="" className="form" onSubmit={handleSearch}>
         <label htmlFor="trackValue"></label>

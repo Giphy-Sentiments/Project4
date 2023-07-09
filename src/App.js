@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./App.css";
-import Form from "./components/Form.js";
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
 import GifOptions from "./components/GifOptions";
@@ -18,7 +17,6 @@ function App() {
         <Route path="/timeline" element={<Timeline />}/>
         <Route path="/about" element={<About/>}/>
       </Routes>
-      <Footer />
     </div>
   );
 }

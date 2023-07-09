@@ -1,5 +1,6 @@
 import GifOptions from "./GifOptions";
 import Form from "./Form";
+import Footer from "./Footer";
 import { Link, Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
 
@@ -22,13 +23,18 @@ function Home() {
 
   return (
     <>
-      <Form
-        trackValue={trackValue}
-        setTrackValue={setTrackValue}
-        handleSearch={handleSearch}
-      />
-
-      <GifOptions searchTerm={searchTerm} />
+      <div className="homeContainer">
+        <Form
+          trackValue={trackValue}
+          setTrackValue={setTrackValue}
+          handleSearch={handleSearch}
+        />
+        <div className="wrapper">
+          <GifOptions searchTerm={searchTerm} />
+        </div>
+      </div>
+      <Footer className="homeFooter"/> 
+      
     </>
   );
 }
