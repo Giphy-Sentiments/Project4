@@ -116,7 +116,7 @@ function GifOptions({ searchTerm }) {
               
               </label>
 
-              {visible === gifs.length && <div>Please Select From the Options Above</div>}          
+              {visible === gifs.length && <div>Please select from the above GIFs</div>}          
               <button
                 className="button"
                 onClick={sendToResults}
