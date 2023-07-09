@@ -1,6 +1,7 @@
 import firebaseConfig from './firebase';
 import { getDatabase, ref, onValue, remove } from 'firebase/database';
 import { useEffect, useState } from "react";
+import Footer from './Footer';
 
 function Timeline() {
     const [timeline, setTimeline] = useState([]);
@@ -20,24 +21,27 @@ function Timeline() {
     }, []);
 
     return (
-        <div>
-            {timeline.map((result) => {
-                return (
-                    <div>
-                        <h3>{result.name.date}</h3>
+        <>
+            <div>
+                {timeline.map((result) => {
+                    return (
+                        <div className="timelineContainer">
+                            <h3>{result.name.date}</h3>
 
 
-                        <h4>{result.name.mood}</h4>
-                        <img
-                            src={result.name.image}
-                            alt={`user selected gif to show the mood of ${result.name.mood}`}
-                        />
+                            <h4>{result.name.mood}</h4>
+                            <img
+                                src={result.name.image}
+                                alt={`user selected gif to show the mood of ${result.name.mood}`}
+                            />
 
-                    </div>
-                );
-            })}
+                        </div>
+                    );
+                })}
 
-        </div>
+            </div>
+            <Footer />
+        </>
 
     );
 }

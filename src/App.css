@@ -21,6 +21,7 @@ html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: 
 
 .App {
   height: 100vh;
+  /* min-height: calc(100vh - 10px); */
   font-size: 125%;
   font-family: 'Lato', sans-serif;
   scroll-behavior: smooth;
@@ -167,11 +168,24 @@ fieldset {
 }
 
 /* StoreGifs styling */
+.result {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 img {
   display: block;
   max-width: 100%;
   margin-bottom: 50px;
   text-align: center;
+  max-width: 70%;
+  max-height: 70%;
+}
+
+.saveToTimeline {
+  text-decoration: none;
 }
 
 .return{
@@ -195,19 +209,48 @@ img {
   opacity: 1;
 }
 
+/* Timeline styling */
+.timelineContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Footer styling */
 Footer {
+  position: relative;
   background-color: #ff7600;
+  color: #f4e6e8;
   font-size: 1.5rem;
   text-align: center;
-  /* align-content: center; */
-  align-self: center;
   margin: 0;
   height: 5vh;
   bottom: 0;
   right: 0;
   left: 0;
-  /* padding: 20px 0; */
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
+.footerP {
+  padding-top: 20px;
+  margin: 0;
+}
 
+.footer {
+  color: #f4e6e8;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.footer:hover, .footer:focus {
+  color: #6056f9;
+  text-shadow: #f4e6e8 1px 2px;
+  font-weight: bold;
+}
+
+.homeContainer{
+  padding-bottom: 36.3vh;
+}

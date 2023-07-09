@@ -23,16 +23,18 @@ function Home() {
 
   return (
     <>
-      <Form
-        trackValue={trackValue}
-        setTrackValue={setTrackValue}
-        handleSearch={handleSearch}
-      />
-      <div className="wrapper">
-        <GifOptions searchTerm={searchTerm} />
+      <div className="homeContainer">
+        <Form
+          trackValue={trackValue}
+          setTrackValue={setTrackValue}
+          handleSearch={handleSearch}
+        />
+        <div className="wrapper">
+          <GifOptions searchTerm={searchTerm} />
+        </div>
       </div>
-
-      <Footer />
+      <Footer className="homeFooter"/> 
+      
     </>
   );
 }

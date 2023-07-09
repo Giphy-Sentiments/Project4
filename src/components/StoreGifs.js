@@ -28,13 +28,13 @@ function StoreGifs({ searchTerm, finalSelection }) {
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper result">
       <img
         src={`${finalSelection}`}
         alt={`user's selected gif that represents the mood of ${searchTerm}`}
       />
 
-      <Link className="button" onClick={sendToTimeline} to="/timeline">
+      <Link className="button saveToTimeline" onClick={sendToTimeline} to="/timeline">
         Save to Timeline
       </Link>
 

@@ -16,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />}/>
         <Route path="/timeline" element={<Timeline />}/>
       </Routes>
+      {/* <Footer /> */}
     </div>
   );
 }
