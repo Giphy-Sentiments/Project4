@@ -10,7 +10,7 @@ function Form({ trackValue, setTrackValue, handleSearch }) {
     <div className='formContainer'>
       <p>How are you feeling today?</p>
       <form action="" className="form" onSubmit={handleSearch}>
-        <label htmlFor="trackValue">I am:</label>
+        <label htmlFor="trackValue"></label>
         <input
           id="trackValue"
           value={trackValue}
