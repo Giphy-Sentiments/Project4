@@ -50,6 +50,7 @@ function GifOptions({ searchTerm }) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setVisible(3);
     if (searchTerm) {
       // set loading true until API loads
       setLoading(true);
@@ -75,11 +76,10 @@ function GifOptions({ searchTerm }) {
   }, [searchTerm]);
 
   return (
-   
     <>
       {loading ? (
         <FadeLoader
-          color="#192422"
+          color="#ff7600"
           loading={loading}
           cssOverride={cssOverride}
           size={550}
@@ -87,15 +87,16 @@ function GifOptions({ searchTerm }) {
           data-testid="loader"
         />
       ) : (
-      
         <>
-        { gifs.length > 0 && (
-          <form>
-            <fieldset>
-              <label className="gifList" htmlFor="gifOptions" aria-label="gifs">
-              
-                {gifs.slice(0, visible).map((gif, index) => (
-               
+          {gifs.length > 0 && (
+            <form>
+              <fieldset>
+                <label
+                  className="gifList"
+                  htmlFor="gifOptions"
+                  aria-label="gifs"
+                >
+                  {gifs.slice(0, visible).map((gif, index) => (
                     <input
                       className="radio"
                       type="radio"
@@ -110,41 +111,40 @@ function GifOptions({ searchTerm }) {
                       checked={selectedGif === gif.images.original.url}
                       disabled={finalSelection ? true : false}
                     />
-                  
+                  ))}
+                </label>
 
-                ))}
-              
-              </label>
+                {visible === gifs.length && (
+                  <div className="error">Please select from the above GIFs</div>
+                )}
 
-
-              {visible === gifs.length && <div className="error">Please Select From the Options Above</div>}          
-
-              <button
-                className="button"
-                onClick={sendToResults}
-                disabled={finalSelection ? true : false}
-              >
-                Select Gif
-              </button>
-              {visible < gifs.length && (
-                <button onClick={showMoreGifs} className="button"> More gifs</button>
-              )}
-            </fieldset>
-          </form>
-        )}
-        { finalSelection &&
-          <div>
-            <StoreGifs
-              finalSelection={finalSelection}
-              searchTerm={searchTerm}
-            />
-          </div>
-        }
+                <button
+                  className="button"
+                  onClick={sendToResults}
+                  disabled={finalSelection ? true : false}
+                >
+                  Select GIFs
+                </button>
+                {visible < gifs.length && (
+                  <button onClick={showMoreGifs} className="button">
+                    {" "}
+                    More GIFs
+                  </button>
+                )}
+              </fieldset>
+            </form>
+          )}
+          {finalSelection && (
+            <div>
+              <StoreGifs
+                finalSelection={finalSelection}
+                searchTerm={searchTerm}
+              />
+            </div>
+          )}
         </>
-        
       )}
     </>
-    
   );
 }
 

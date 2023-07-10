@@ -48,7 +48,7 @@ function Timeline() {
                   );
               })}
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </>
     );
 }
