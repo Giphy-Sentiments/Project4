@@ -27,7 +27,7 @@ function StoreGifs({ searchTerm, finalSelection }) {
     get(gifsOnDateRef)
       .then((snapshot) => {
         if (snapshot.exists()) {
-          alert("Gif has been populated for that day");
+          alert("GIF has been logged for today, please try again tomorrow");
         } else {
           push(databaseRef, result);
         }

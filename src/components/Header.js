@@ -30,9 +30,11 @@ function Header() {
       <header>
         <nav>
           <div
-            className={`menu-toggle ${showMenu ? "active" : ""}`}
+            className="menu-toggle"
             onClick={handleMenuToggle}
           >
+            <div className="hamburger"></div>
+            <div className="hamburger"></div>
             <div className="hamburger"></div>
           </div>
           <ul className={`navLinks ${showMenu ? "active" : ""}`}>

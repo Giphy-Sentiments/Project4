@@ -70,8 +70,11 @@ function GifOptions({ searchTerm }) {
         setTimeout(() => {
           setLoading(false);
         }, 1000);
-      });
-    }
+      })
+      .catch((error)=> {
+          error = "We're having trouble getting the GIFs , please come back later!";
+          alert(error);   
+    })}
   }, [searchTerm]);
 
   return (
@@ -92,7 +95,7 @@ function GifOptions({ searchTerm }) {
               <fieldset>
                 <label
                   className="gifList"
-                  htmlFor="gifOptions"
+                  htmlFor="gifList"
                   aria-label="gifs"
                 >
                   {gifs.slice(0, visible).map((gif, index) => (
@@ -114,7 +117,7 @@ function GifOptions({ searchTerm }) {
                 </label>
 
                 {visible === gifs.length && (
-                  <div className="error">Please select from the above GIFs</div>
+                  <div className="error">Please select from the above GIFs or search again</div>
                 )}
 
                 <button
