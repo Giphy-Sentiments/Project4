@@ -4,7 +4,6 @@ import React, { useState } from "react";
 
 
 function Home() {
-  // declared two state variables to represent the emotion and search term to be used for searching gif & set value as empty string
 
   // this tracks the value of the input
   const [trackValue, setTrackValue] = useState("");
