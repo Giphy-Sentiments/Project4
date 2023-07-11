@@ -280,6 +280,19 @@ Footer {
   display: none;
   cursor: pointer;
   z-index: 999;
+  padding: 5px;
+}
+
+.menu-toggle.open .hamburger:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.open .hamburger:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.open .hamburger:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 .hamburger {
@@ -348,8 +361,8 @@ Footer {
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 0;
-    left: 4rem;
+    top: 60px;
+    left: 0;
     width: 100%;
     height: auto;
     background-color: transparent;
@@ -374,11 +387,6 @@ Footer {
     margin-bottom: 20px;
   }
 
-  /* .gifOptions{
-  background: #20a4cc;
-  display: flex;
-  flex-direction: column;
-} */
 
 .gifList{
   display: flex;
@@ -407,9 +415,6 @@ fieldset{
 }
 
 }
-
-
-
 
 @media (max-width: 800px) {
 

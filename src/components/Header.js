@@ -7,13 +7,16 @@ function Header() {
 
   const [showMenu, setShowMenu] = useState(false);
 
+  const [isToggled, setIsToggled] = useState(false);
+
   const handleMenuToggle = () => {
+    setIsToggled((prevState) => !prevState);
     setShowMenu((prevState) => !prevState);
   };
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > 600) {
         setShowMenu(false);
       }
     };
@@ -30,7 +33,7 @@ function Header() {
       <header>
         <nav>
           <div
-            className="menu-toggle"
+            className={`menu-toggle ${isToggled ? "open" : ""}`}
             onClick={handleMenuToggle}
           >
             <div className="hamburger"></div>

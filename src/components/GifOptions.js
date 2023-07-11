@@ -72,7 +72,7 @@ function GifOptions({ searchTerm }) {
         }, 1000);
       })
       .catch((error)=> {
-          error = "We're having trouble getting the GIFs , please come back later!";
+          error = "We're having trouble getting the GIFs, please come back later!";
           alert(error);   
     })}
   }, [searchTerm]);
