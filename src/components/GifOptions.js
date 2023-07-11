@@ -32,7 +32,6 @@ function GifOptions({ searchTerm }) {
   const cssOverride = {
     display: "block",
     margin: "0 auto",
-    borderColor: "red",
   };
 
   //function to update the visible state so when user requests more gifs onClick it will add 3 more gifs each time the array is mapped over
@@ -123,7 +122,7 @@ function GifOptions({ searchTerm }) {
                   onClick={sendToResults}
                   disabled={finalSelection ? true : false}
                 >
-                  Select GIFs
+                  Select GIF
                 </button>
                 {visible < gifs.length && (
                   <button onClick={showMoreGifs} className="button">
