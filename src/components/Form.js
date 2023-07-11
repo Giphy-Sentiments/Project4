@@ -15,7 +15,7 @@ function Form({ trackValue, setTrackValue, handleSearch }) {
           value={trackValue}
           onChange={handleInputChange}
           type="text"
-          placeholder="Type your emotion"
+          placeholder="type here"
         />
         <button type="submit" className="button">Search</button>
       </form>
