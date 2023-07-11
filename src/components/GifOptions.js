@@ -10,10 +10,8 @@ function GifOptions({ searchTerm }) {
   // state for initial amount of gifs to display to the user
   const [visible, setVisible] = useState(3);
 
-  // select
   const [selectedGif, setSelectedGif] = useState("");
 
-  // final selection
   const [finalSelection, setFinalSelection] = useState("");
 
   const [showAlert, setShowAlert] = useState(false);
@@ -21,6 +19,9 @@ function GifOptions({ searchTerm }) {
   const select = (e) => {
     setSelectedGif(e.target.value);
   };
+
+  //state will keep track of the loading variable
+  const [loading, setLoading] = useState(false);
 
   const sendToResults = (e) => {
     e.preventDefault();
@@ -34,8 +35,7 @@ function GifOptions({ searchTerm }) {
     margin: "0 auto",
   };
 
-  //function to update the visible state so when user requests more gifs onClick it will add 3 more gifs each time the array is mapped over
-
+  //function to update the visible state to give users more gifs
   const showMoreGifs = (e) => {
     e.preventDefault();
     if (visible >= gifs.length) {
@@ -44,9 +44,6 @@ function GifOptions({ searchTerm }) {
       setVisible((prevValue) => prevValue + 3);
     }
   };
-
-  //state will keep track of the loading variable
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setVisible(3);
@@ -63,18 +60,14 @@ function GifOptions({ searchTerm }) {
           limit: 9,
         },
       }).then((res) => {
-        
         setGifs(res.data.data);
 
         //once API loads set loading to false
         setTimeout(() => {
           setLoading(false);
         }, 1000);
-      })
-      .catch((error)=> {
-          error = "We're having trouble getting the GIFs, please come back later!";
-          alert(error);   
-    })}
+      });
+    }
   }, [searchTerm]);
 
   return (
