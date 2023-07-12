@@ -42,17 +42,17 @@ function Header() {
           </div>
           <ul className={`navLinks ${showMenu ? "active" : ""}`}>
             <li>
-              <Link className="links" to="/">
+              <Link className="links" to="/" onClick={handleMenuToggle}>
                 Home
               </Link>
             </li>
             <li>
-              <Link className="links" to="/about">
+              <Link className="links" to="/about" onClick={handleMenuToggle}>
                 About
               </Link>
             </li>
             <li>
-              <Link className="links" to="/timeline">
+              <Link className="links" to="/timeline" onClick={handleMenuToggle}>
                 Timeline
               </Link>
             </li>
