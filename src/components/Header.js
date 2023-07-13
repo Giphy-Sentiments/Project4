@@ -10,23 +10,28 @@ function Header() {
   const [isToggled, setIsToggled] = useState(false);
 
   const handleMenuToggle = () => {
-    setIsToggled((prevState) => !prevState);
-    setShowMenu((prevState) => !prevState);
+    if (window.innerWidth <= 600) {
+      setIsToggled((prevState) => !prevState);
+      setShowMenu((prevState) => !prevState);
+    }
   };
+
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 600) {
         setShowMenu(false);
+        setIsToggled(false);
       }
     };
 
-    window.addEventListener('resize', handleResize);
+  window.addEventListener('resize', handleResize);
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  return () => {
+    window.removeEventListener('resize', handleResize);
+  };
+}, []);
+
 
   return (
     <div className="wrapper">
@@ -42,17 +47,17 @@ function Header() {
           </div>
           <ul className={`navLinks ${showMenu ? "active" : ""}`}>
             <li>
-              <Link className="links" to="/">
+              <Link className="links" to="/" onClick={handleMenuToggle}>
                 Home
               </Link>
             </li>
             <li>
-              <Link className="links" to="/about">
+              <Link className="links" to="/about" onClick={handleMenuToggle}>
                 About
               </Link>
             </li>
             <li>
-              <Link className="links" to="/timeline">
+              <Link className="links" to="/timeline" onClick={handleMenuToggle}>
                 Timeline
               </Link>
             </li>
