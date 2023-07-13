@@ -6,12 +6,13 @@ function Footer() {
         <a
           className="footer"
           href="https://github.com/Giphy-Sentiments"
-          target="_blank"
         >
           Hara, Jay, Lucian & Josh
         </a>{" "}
         at{" "}
-        <a className="footer" href="https://junocollege.com" target="_blank">
+        <a className="footer" 
+        href="https://junocollege.com" 
+        >
           Juno College
         </a>{" "}
         2023

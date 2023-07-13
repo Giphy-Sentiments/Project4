@@ -14,7 +14,6 @@ function GifOptions({ searchTerm }) {
 
   const [finalSelection, setFinalSelection] = useState("");
 
-  const [showAlert, setShowAlert] = useState(false);
 
   const select = (e) => {
     setSelectedGif(e.target.value);
@@ -38,9 +37,7 @@ function GifOptions({ searchTerm }) {
   //function to update the visible state to give users more gifs
   const showMoreGifs = (e) => {
     e.preventDefault();
-    if (visible >= gifs.length) {
-      setShowAlert(true);
-    } else {
+    if (visible < gifs.length) {
       setVisible((prevValue) => prevValue + 3);
     }
   };
