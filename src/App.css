@@ -64,7 +64,8 @@ h1 {
   font-size: 5rem;
   text-transform: uppercase;
   color:#ff7600;
-  padding-top: 200px;
+  padding-top: 150px;
+  padding-bottom: 50px;
 }
 
 h2 {
@@ -259,7 +260,7 @@ Footer {
   margin-bottom: 100px;
   color:#f4e6e8;
   padding: 15px;
-  box-shadow: 6px 12px 5px 19px #000000bf;
+  box-shadow: 6px 12px 5px 15px #000000bf;
 }
 
 /* Hamburger Menu styling */
@@ -325,15 +326,22 @@ Footer {
     padding: 0;
   }
 
+  header{
+   padding: 50px 45px;
+  }
+
   h1{
     font-size: 2.5rem;
-    margin-bottom: 50px;
     color:#ff7600;
   }
 
   h2{
     font-size: 2rem;
   }
+
+  .homeContainer{
+    padding: 20px 25px 400px;
+}
 
   .formContainer p{
     font-size: 1rem;
@@ -362,6 +370,16 @@ Footer {
     align-items: flex-start;
     gap: 20px;
     animation: slideOut 0.3s ease;
+  }
+
+  .about{
+    text-align:left;
+    box-shadow: 3px 6px 3px 10px #000000bf;
+    font-size: 1rem;
+    padding: 15px;
+    margin-top: 100px;
+    margin-bottom: 150px;
+    margin-left: 20px;
   }
 
   @keyframes slideOut {
@@ -411,14 +429,14 @@ Footer {
     margin-bottom: 25px;
   }
 
-  .homeContainer{
-    padding-bottom: 37.3vh;
-  }
-
   .footerP{
-    padding-top: 12px;
+    text-align: center;
+    padding:0;
   }
 
+  Footer{
+    padding: 15px;
+  }
 }
 
 @media (max-width: 800px) {
@@ -453,3 +471,4 @@ Footer {
     margin-bottom: 25px;
   }
 }
+

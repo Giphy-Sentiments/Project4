@@ -16,7 +16,6 @@ function Header() {
     }
   };
 
-
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 600) {
@@ -31,7 +30,6 @@ function Header() {
     window.removeEventListener('resize', handleResize);
   };
 }, []);
-
 
   return (
     <div className="wrapper">
