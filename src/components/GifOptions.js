@@ -46,6 +46,7 @@ function GifOptions({ searchTerm }) {
 
   useEffect(() => {
     setVisible(3);
+    setFinalSelection("");
     if (searchTerm) {
       // set loading true until API loads
       setLoading(true);
