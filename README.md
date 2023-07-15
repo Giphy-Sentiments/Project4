@@ -1,4 +1,4 @@
-#Giphy-Sentiments
+# Giphy-Sentiments
 
 Welcome to Giphy-sentiments, a unique app that captures the ever-changing emotional state of individuals using Gifs! We are dedicated to providing a platform that allows individuals to explore and understand the changes in their emotional state through creative means.
 
